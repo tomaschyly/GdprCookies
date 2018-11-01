@@ -1,0 +1,54 @@
+/**
+ * @author Tomáš Chylý
+ * @copyright Tomáš Chylý
+ */
+
+/*** Global ***/
+body.noScroll { position: fixed; overflow: hidden; left: 0; right: 0; }
+
+/*** Intro view ***/
+#chyly-gdpr-cookies-consent { display: none; position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: 100; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.6); }
+.chyly-gdpr-cookies-popup { display: flex; width: 90%; max-width: 480px; height: 90%; max-height: 320px; flex-direction: column; padding: 0; border: 2px solid black; box-sizing: border-box; background: white; }
+.chyly-gdpr-cookies-popup-header { display: block; width: 100%; height: auto; padding: 15px; box-sizing: border-box; margin: 0; background: #003399; }
+.chyly-gdpr-cookies-popup-header h2 { padding: 0; margin: 0; color: white; font-size: 24px; font-weight: bold; text-align: center; }
+.chyly-gdpr-cookies-popup-content { display: block; flex-grow: 1; width: 100%; height: auto; overflow: hidden; overflow-y: auto; padding: 15px 15px 0 15px; box-sizing: border-box; }
+.chyly-gdpr-cookies-popup-content p { font-size: 14px; line-height: 1.5; font-weight: normal; text-align: justify; margin: 0 0 15px 0; }
+.chyly-gdpr-cookies-popup-footer { display: block; width: 100%; height: auto; padding: 15px; box-sizing: border-box; border-top: 2px solid black; margin: 0; background: transparent; }
+.chyly-gdpr-cookies-popup-footer button { display: block; width: auto; height: auto; padding: 10px 10px; border: 2px solid black; color: black; font-size: 16px; font-weight: bold; background: transparent; transition: color 0.4s linear, background 0.4s linear; }
+#chyly-gdpr-cookies-consent-categories { float: left; text-decoration: none; }
+#chyly-gdpr-cookies-consent-categories:hover,
+#chyly-gdpr-cookies-consent-categories:focus { text-decoration: none; }
+#chyly-gdpr-cookies-consent-categories span { display: inline; text-decoration: none; border-bottom: 2px solid transparent; transition: border 0.4s linear; }
+#chyly-gdpr-cookies-consent-categories:hover span,
+#chyly-gdpr-cookies-consent-categories:focus span { text-decoration: none; border-bottom: 2px solid black; }
+#chyly-gdpr-cookies-consent-agree { float: right; border-color: #003399; color: white; background: #003399; }
+#chyly-gdpr-cookies-consent-agree:hover,
+#chyly-gdpr-cookies-consent-agree:focus { color: #003399; background: transparent; }
+
+#chyly-gdpr-cookies-categories .messages-container {  }
+#chyly-gdpr-cookies-categories h1,
+#chyly-gdpr-cookies-categories h2 { margin: 0 0 15px 0; }
+#chyly-gdpr-cookies-categories p { margin: 0 0 15px 0; font-weight: normal; text-transform: none; }
+.chyly-gdpr-cookies-categories-content-container { clear: both; }
+.chyly-gdpr-cookies-checkbox-container { float: right; clear: both; margin: 0 0 15px 0; }
+.chyly-gdpr-cookies-checkbox-container label { padding: 0 15px 0 0; font-weight: bold; cursor: pointer; }
+#chyly-gdpr-cookies-categories .form-actions { display: block; position: relative; overflow: hidden; width: 100%; clear: both; padding: 15px 0 0 0; border-top: 2px solid black; }
+#chyly-gdpr-cookies-categories .form-actions button { display: block; width: auto; height: auto; padding: 10px 10px; border: 2px solid black; color: black; font-size: 16px; font-weight: bold; text-decoration: none; background: transparent; transition: color 0.4s linear, background 0.4s linear; }
+#chyly-gdpr-cookies-categories .form-actions button:hover,
+#chyly-gdpr-cookies-categories .form-actions button:focus { text-decoration: none; }
+#chyly-gdpr-cookies-categories .form-actions button span { display: inline; text-decoration: none; border-bottom: 2px solid transparent; transition: border 0.4s linear; }
+#chyly-gdpr-cookies-categories .form-actions button:hover span,
+#chyly-gdpr-cookies-categories .form-actions button:focus span { text-decoration: none; border-bottom: 2px solid black; }
+#chyly-gdpr-cookies-categories .form-actions #chyly-gdpr-cookies-categories-agree-all { margin: 0 auto; border-color: #003399; color: white; text-decoration: none; background: #003399; }
+#chyly-gdpr-cookies-categories .form-actions #chyly-gdpr-cookies-categories-agree-all:hover,
+#chyly-gdpr-cookies-categories .form-actions #chyly-gdpr-cookies-categories-agree-all:focus { color: #003399; background: transparent; }
+#chyly-gdpr-cookies-categories .form-actions button.submit { position: absolute; top: 15px; right: 0; }
+
+/*** Responsive styles ***/
+@media (max-width: 575px) {
+	.chyly-gdpr-cookies-popup-footer button { float: none !important; max-width: 90%; min-width: 60%; margin: 0 auto 15px auto; }
+	.chyly-gdpr-cookies-popup-footer button:last-of-type { margin-bottom: 0; }
+
+	#chyly-gdpr-cookies-categories .form-actions button { float: none; position: relative !important; top: unset !important; right: unset !important; max-width: 90%; min-width: 60%; margin: 0 auto 15px auto !important; }
+	#chyly-gdpr-cookies-categories .form-actions button:last-of-type { margin-bottom: 0; }
+}

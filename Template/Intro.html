@@ -1,0 +1,23 @@
+<!--suppress HtmlUnknownTarget -->
+<link href="{$styleCss}" rel="stylesheet" type="text/css" media="all">
+<!--suppress JSUnusedLocalSymbols -->
+<script>var TCH_GDPRCookies_settings = {$settingsJs};</script>
+<!--suppress HtmlUnknownTarget -->
+<script src="{$functionsJs}"></script>
+
+<div id="{$pluginID}-consent">
+	<div class="{$pluginID}-popup">
+		<div class="{$pluginID}-popup-header">
+			<h2>{$title}</h2>
+		</div>
+
+		<div class="{$pluginID}-popup-content">
+			{$content}
+		</div>
+
+		<div class="{$pluginID}-popup-footer">
+			<button type="button" id="{$pluginID}-consent-agree" data-href="{$agreeUrl}">{$accept}</button>
+			<button type="button" id="{$pluginID}-consent-categories" data-href="{$purposesUrl}"><span>{$purposes}</span></button>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,75 @@
+<!--suppress HtmlUnknownTarget -->
+<link href="{$styleCss}" rel="stylesheet" type="text/css" media="all">
+<script>var TCH_GDPRCookies_settings = {$settingsJs};</script>
+<!--suppress HtmlUnknownTarget -->
+<script src="{$functionsJs}"></script>
+
+<div id="{$pluginID}-categories">
+	<div class="container">
+		<div class="wrap">
+			<div class="row">
+				<div class="col-xs-12 col-12">
+					<div class="messages-container">{$messages}</div>
+				</div>
+
+				<div class="col-xs-12 col-12">
+					<h1>{$title}</h1>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-12 col-12">
+					{$afterTitle}
+				</div>
+			</div>
+
+			<div class="{$pluginID}-categories-cookies">
+				<div class="row">
+					<div class="col-xs-12 col-12">{$cookiesContent}</div>
+				</div>
+			</div>
+
+			<div class="{$pluginID}-categories-necessary">
+				<div class="row">
+					<div class="col-xs-12 col-12"><h2>{$necessaryTitle}</h2></div>
+					<div class="col-xs-12 col-12">{$necessaryContent}</div>
+				</div>
+			</div>
+
+			<form action="{$submitUrl}" method="post" id="{$pluginID}-categories-form">
+				<input type="text" name="username" value="" style="display: none !important;">
+
+				<div class="{$pluginID}-categories-content-container {$pluginID}-categories-analytics">
+					<div class="row">
+						<div class="col-xs-12 col-12"><h2>{$analyticsTitle}</h2></div>
+						<div class="col-xs-12 col-12">{$analyticsContent}</div>
+						<div class="col-xs-12 col-12">
+							<div class="{$pluginID}-checkbox-container">
+								<label for="{$pluginID}-analytics">{$analyticsEnabled}</label>
+								<input type="checkbox" id="{$pluginID}-analytics" class="{$pluginID}-checkbox" name="analytics_category" value="true" title="{$analyticsEnabled}" {$analyticsChecked}>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="{$pluginID}-categories-content-container {$pluginID}-categories-marketing">
+					<div class="row">
+						<div class="col-xs-12 col-12"><h2>{$marketingTitle}</h2></div>
+						<div class="col-xs-12 col-12">{$marketingContent}</div>
+						<div class="col-xs-12 col-12">
+							<div class="{$pluginID}-checkbox-container">
+								<label for="{$pluginID}-marketing">{$marketingEnabled}</label>
+								<input type="checkbox" id="{$pluginID}-marketing" class="{$pluginID}-checkbox" name="marketing_category" value="true" title="{$marketingEnabled}" {$marketingChecked}>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-actions">
+					<button type="button" title="{$agreeAll}" id="{$pluginID}-categories-agree-all" class="button">{$agreeAll}</button>
+					<button type="submit" title="{$save}" class="button submit"><span>{$save}</span></button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
