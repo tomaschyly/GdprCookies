@@ -1,3 +1,6 @@
+v 1.4
+- fix url issues with localhost on Xampp
+
 v 1.3
 - fix wrong js Date in some browsers
 

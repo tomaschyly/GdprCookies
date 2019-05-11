@@ -185,8 +185,8 @@ class Intro {
 			$template->Insert ('purposes', __ ('Show Purposes', \ChylyGDPRCookies::ID));
 		}
 
-		$template->Insert ('agreeUrl', '/wp-admin/admin-ajax.php?action=' . str_replace ('-', '_', \ChylyGDPRCookies::ID) . '_agree');
-		$template->Insert ('purposesUrl', '/wp-admin/admin-ajax.php?action=' . str_replace ('-', '_', \ChylyGDPRCookies::ID) . '_purposes');
+		$template->Insert ('agreeUrl', get_site_url () . '/wp-admin/admin-ajax.php?action=' . str_replace ('-', '_', \ChylyGDPRCookies::ID) . '_agree');
+		$template->Insert ('purposesUrl', get_site_url () . '/wp-admin/admin-ajax.php?action=' . str_replace ('-', '_', \ChylyGDPRCookies::ID) . '_purposes');
 
 		$template->Render ();
 	}
