@@ -130,6 +130,7 @@ class Intro {
 		}
 
 		echo json_encode ([
+			'id' => $pageID,
 			'href' => $pageID != null ? get_permalink ($pageID) : \ChylyGDPRCookies::ID
 		]);
 		exit;

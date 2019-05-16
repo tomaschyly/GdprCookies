@@ -12,7 +12,7 @@ use WP_Query;
 class Categories {
 
 	const PAGE_SLUG = "chyly-gdpr-cookies-categories";
-	const PAGE_SLUG_SUBMIT = "wp-admin/admin-ajax.php?action=chyly_gdpr_cookies_categories_submit";
+	const PAGE_SLUG_SUBMIT = "?action=chyly_gdpr_cookies_categories_submit";
 	const PAGE_AJAX_SUBMIT = "chyly_gdpr_cookies_categories_submit";
 	const COOKIE_MESSAGES = "chyly_gdpr_cookies_categories_messages";
 
@@ -21,15 +21,19 @@ class Categories {
 		'Page/Categories.php' => 'Privacy Policy Categories page'
 	];
 
+	private $renderTitle = true;
+
 	/**
 	 * Categories initialization.
 	 */
-	public function __construct () {
+	public function __construct ($renderTitle = true) {
 		if (self::$Instance != null) {
 			return;
 		}
 
 		self::$Instance = $this;
+
+		$this->renderTitle = $renderTitle;
 
 		$this->InitContent ();
 	}
@@ -53,6 +57,11 @@ class Categories {
 			if (strpos (get_post_field ('post_name'), self::PAGE_SLUG) !== false) {
 				wp_untrash_post (get_the_ID ());
 
+				wp_update_post ([
+					'ID' => get_the_ID (),
+					'post_content' => '[' . str_replace ('-', '_', self::PAGE_SLUG) . '_categories]'
+				]);
+
 				$exists = true;
 			}
 		}
@@ -70,12 +79,12 @@ class Categories {
 					'post_type' => 'page',
 					'post_title' => $title,
 					'post_name' => self::PAGE_SLUG,
-					'post_content' => '',
+					'post_content' => '[' . str_replace ('-', '_', self::PAGE_SLUG) . '_categories]',
 					'post_status' => 'publish',
 					'post_author' => 1
 				]);
 
-				update_post_meta ($pageID, '_wp_page_template', $i);
+				/*update_post_meta ($pageID, '_wp_page_template', $i);*/
 			}
 		}
 	}
@@ -108,6 +117,8 @@ class Categories {
 		add_filter ('theme_page_templates', ['ChylyGDPRCookiesView\Categories', 'AddTemplate']);
 		add_filter ('wp_insert_post_data', ['ChylyGDPRCookiesView\Categories', 'RegisterTemplate']);
 		add_filter ('template_include', ['ChylyGDPRCookiesView\Categories', 'ViewTemplate']);
+
+		add_shortcode (str_replace ('-', '_', self::PAGE_SLUG) . '_categories', ['ChylyGDPRCookiesView\Categories', 'PageContent']);
 
 		add_action ('wp_ajax_' . self::PAGE_AJAX_SUBMIT, ['ChylyGDPRCookiesView\Categories', 'FormSubmit']);
 		add_action ('wp_ajax_nopriv_' . self::PAGE_AJAX_SUBMIT, ['ChylyGDPRCookiesView\Categories', 'FormSubmit']);
@@ -166,6 +177,18 @@ class Categories {
 	}
 
 	/**
+	 * Render Categories page content.
+	 */
+	public static function PageContent ($args) {
+		ob_start ();
+		new Categories (isset ($args ['title']) && $args ['title'] == 'false' ? false : true);
+		$content = ob_get_contents ();
+		ob_end_clean ();
+
+		return $content;
+	}
+
+	/**
 	 * Check if consent given for category.
 	 */
 	public static function ConsentGiven ($for) {
@@ -179,7 +202,7 @@ class Categories {
 		$data = $_POST;
 
 		if (isset ($data ['username']) && $data ['username'] != '') {
-			wp_redirect ('/' . self::PAGE_SLUG, 302);
+			wp_redirect ($_SERVER ['HTTP_REFERER'], 302);
 			exit;
 		}
 
@@ -202,7 +225,7 @@ class Categories {
 		$message = function_exists ('pll__') ? pll__ ('Settings updated') : __ ('Settings updated', \ChylyGDPRCookies::ID);
 		setcookie (self::COOKIE_MESSAGES, base64_encode (serialize ([$message])), time () + $introCookieSeenLifespan, "/");
 
-		wp_redirect ('/' . self::PAGE_SLUG, 302);
+		wp_redirect ($_SERVER ['HTTP_REFERER'], 302);
 		exit;
 	}
 
@@ -230,6 +253,15 @@ class Categories {
 		}
 		$template->Insert ('messages', $messages);
 
+		if ($this->renderTitle) {
+			$titleContainer = '<div class="col-xs-12 col-12">
+	<h1>{$title}</h1>
+</div>';
+			$template->Insert ('titleContainer', $titleContainer);
+		} else {
+			$template->Insert ('titleContainer', '');
+		}
+
 		$afterTitle = apply_filters (str_replace ('-', '_', \ChylyGDPRCookies::ID) . '_categories_afterTitle', '');
 		$template->Insert ('afterTitle', $afterTitle);
 
@@ -240,7 +272,7 @@ class Categories {
 		$template->Insert ('necessaryTitle', $necessaryData ['title']);
 		$template->Insert ('necessaryContent', $necessaryData ['content']);
 
-		$template->Insert ('submitUrl', '/' . self::PAGE_SLUG_SUBMIT);
+		$template->Insert ('submitUrl', admin_url ('admin-ajax.php') . '/' . self::PAGE_SLUG_SUBMIT);
 
 		$analyticsData = $this->PageData (Admin::GetOption (Admin::$SettingsOptionsGroups ['categories'], 'analytics_content'));
 		$template->Insert ('analyticsTitle', $analyticsData ['title']);
