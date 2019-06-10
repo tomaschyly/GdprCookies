@@ -1,3 +1,6 @@
+v1.5.1
+- update js script to match tomaschyly-react theme
+
 v 1.5
 - Tomas Chyly (React) theme compatibility
 

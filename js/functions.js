@@ -162,7 +162,7 @@ var wait = setInterval (function () {
 						}).always (function (response) {
 							self.HidePopup ('#chyly-gdpr-cookies-consent');
 
-							if (typeof window.TCH_App !== 'undefined') {
+							if (typeof window.App_static.Instance !== 'undefined') {
 								window.location.reload ();
 							} else if (typeof (response) === 'string' && response !== '') {
 								var json = null;
@@ -219,8 +219,8 @@ var wait = setInterval (function () {
 								}
 
 								if (json !== null && typeof (json.href) !== 'undefined') {
-									if (typeof window.TCH_App !== 'undefined') {
-										window.TCH_App.NavigatePage (json.id);
+									if (typeof window.App_static.Instance !== 'undefined') {
+										window.App_static.Instance.NavigatePage (json.id);
 									} else {
 										window.location.href = json.href;
 									}

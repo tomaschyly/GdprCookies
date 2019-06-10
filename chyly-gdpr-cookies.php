@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Chyly GDPR Cookies
-Version: 1.5
+Version: 1.5.1
 Description: Ask users for consent before non-necessary cookies from scripts are used. There is also GDPR Privacy Policy explanation shown to users on first visit.
 Author: Tomas Chyly
 Author URI: https://tomas-chyly.com/en/
